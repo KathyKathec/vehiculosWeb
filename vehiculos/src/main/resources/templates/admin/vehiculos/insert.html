@@ -1,0 +1,20 @@
+<DOCTYPE html>
+<html xlms:th="http://www.thymeleaf.org">
+<body>
+<form method="POST" enctype="multipart/form-data">
+	ano: <input type="number" name="ano" />
+	placa: <input type="text" name="placa" />
+	modelo: <input type="text" name="modelo"/>
+	cor: <input type="text" name="cor"/>
+	marca: <input type="text" name="marca"/>
+	imagem:<input type="file" name="file"/>
+	Categoria:
+	<select name="categoriaID" >
+		<option th:each="categoria: ${categorias}" 
+		th:value="${categoria.CATEGORIAID}" 
+		th:text="${categoria.nome}"></option>
+	</select>
+	<input type="submit"/>
+</form>
+</body>
+</html>

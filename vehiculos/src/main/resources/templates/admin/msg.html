@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+</head>
+<body>
+<div th:if="${not #strings.isEmpty(inserirok)}">
+	<p style="color:green" th:text="${inserirok}"></p>
+</div>
+
+<div th:if="${not #strings.isEmpty(erroinserir)}">
+	<p style="color:red" th:text="${erroinserir}"></p>
+</div>
+</body>
+</html>

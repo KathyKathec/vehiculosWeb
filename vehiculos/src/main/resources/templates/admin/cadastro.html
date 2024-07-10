@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Cadastrar</title>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<meta name="description" content=""/>
+		<meta name="author" content=""/>
+
+		<!-- Bootstrap core CSS -->
+		<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+		<link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet"/>
+	
+		<!-- Custom styles for this template -->
+		<link href="/css/style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<form method="POST" enctype="multipart/form-data" th:action="@{/vehiculos/admin/cadastro}">
+			<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="ano">Ano</label>
+				<input type="number" class="form-control" id="ano" name="ano" th:field="${ano}">
+			</div>
+			<div class="form-group col-md-6">
+				<label for="placa">Placa</label>
+				<input type="text" class="form-control" id="placa" name="placa" th:field="${placa}">
+			</div>
+			</div>
+			<div class="form-group">
+			<label for="cor">Cor</label>
+			<input type="text" name="cor" class="form-control" id="cor" placeholder="Azul, Branco..." th:field="${cor}"> 
+			</div>
+			<div class="form-group">
+			<label for="modelo">Modelo</label>
+			<input type="text" name="modelo" class="form-control" id="modelo" placeholder="Insira um modelo aqui" th:field="${modelo}">
+			</div>
+			<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="marca">Marca</label>
+				<input type="text" name="marca" class="form-control" id="marca" th:field="${marca}">
+			</div>
+			<div class="form-group">
+				<label for="imagem">Insira uma imagem</label>
+				<input type="file" name="file" class="form-control-file" id="file" th:field="${imagem}">
+			</div>
+			
+			<div class="form-group col-md-4">
+				<label for="categoriaId">Categoria</label>
+				<select id="cat" class="form-control">
+					<option  th:each="categoria : ${categorias}" 
+							th:field="${categoriaId}"
+							th:value="${categoria.id}" 
+							th:text="${categoria.nome}">Selecione uma categoria </option>
+					
+				</select>
+			</div>
+			
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-primary mb-2">Salvar</button>
+			</div>
+
+		</form>
+
+
+		
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+
+		<!-- Placed at the end of the document so the pages load faster -->
+			<script src="/webjars/jquery/jquery.min.js"></script>
+			<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+			<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+			<script type="text/javascript">
+
+					$(function () {
+						$('[data-toggle="popover"]').popover();
+					});
+					
+					$(document).ready(function(){
+						$(".navbar-toggle").click(function(){
+							$(".sidebar").toggleClass("sidebar-open");
+						})
+					});
+
+			</script>
+	</body>
+</html>		

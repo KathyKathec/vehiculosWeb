@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+xmls:th="http://thymeleaf.org"
+xmls:layout="http://www.ultraq.net/thymeleaf/layout">
+<head>
+	<title>Go, Car</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+ 
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+</head>
+</head>
+<body>
+
+		
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="/vehiculos/admin">Home</a>
+		
+			  
+			<a href="/vehiculos/admin/cadastro">
+				<button type="button" class="btn btn-outline-primary">Cadastrar veículo</button>
+			</a>
+			  <button type="button" class="btn btn-outline-primary">Cadastrar categoria</button>
+			
+			 
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+				  Categorias
+				</a>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/SUV">SUV</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Sedan">Sedan</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Hatchback">Hatchback</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Crossover">Crossover</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Muscle">Muscle</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Coupe">Coupe</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Minivan">Minivan</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Esportivo">Esportivo</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Wagon">Wagon</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Caminhões">Caminhões</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Camionetes">Camionetes</a>
+				</div>
+			  </li>
+			
+			  <form class="d-flex" id="searchModelo">
+				<input class="form-control mr-2" id="modelo" type="search" placeholder="Insira um modelo" aria-label="search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			  </form>
+
+			  <form class="d-flex" id="searchAno">
+				<input class="form-control mr-2"  type="number" id="ano" placeholder="Insira um ano" aria-label="search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			  </form>
+			 
+		  
+		  </nav>
+
+
+
+			
+
+	
+		  <div class="container">
+			<div class="row">
+			  <p>HI</p>
+			  <div class="col-md-4" th:each="vehiculo : ${vehiculos}">
+				<a th:href="@{/vehiculos/admin/{id}(id=${vehiculo.id})}" aria-label="View vehicle details" class="card-link">
+				  <div class="card">
+					<img th:src="${vehiculo.imagem}" class="card-img-top" alt="...">
+					<div class="card-body">
+					  <h5 class="card-title">Modelo: <span th:text="${vehiculo.modelo}"></span></h5>
+					  <h6 class="card-subtitle mb-2 text-muted">Ano: <span th:text="${vehiculo.ano}"></span></h6>
+					</div>
+				  </div>
+				</a>
+			  </div>
+			</div>
+		  </div>
+
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Tu script JavaScript -->
+	<script th:inline="javascript">
+        /*<![CDATA[*/
+		$(document).ready(function() {
+			$("#searchModelo").submit(function(e) {
+				e.preventDefault();
+				var modelo = $('#modelo').val().trim(); // Obtener el valor del campo de entrada con el ID "modelo"
+				// Construir la nueva URL
+				var newUrl = "/vehiculos/admin/modelo/" + modelo;
+				// Reemplazar completamente la URL actual con la nueva URL
+				window.location.href = newUrl;
+			});
+		});$(document).ready(function() {
+			$("#searchAno").submit(function(e) {
+				e.preventDefault();
+				var ano = $('#ano').val().trim(); 
+				// Construir la nueva URL
+				var newUrl = "/vehiculos/admin/ano/" + ano;
+				// Reemplazar completamente la URL actual con la nueva URL
+				window.location.href = newUrl;
+			});
+		});
+		
+        /*]]>*/
+    </script>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

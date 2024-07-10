@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+xmls:th="http://thymeleaf.org"
+xmls:layout="http://www.ultraq.net/thymeleaf/layout">
+<head>
+	<title>Go, Car</title>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	
+	
+	<!-- Custom styles for this template -->
+	<link href="/css/style.css" rel="stylesheet" />
+</head>
+</head>
+<body>
+
+		
+		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+			<a class="navbar-brand" href="/vehiculos/admin">Home</a>
+		
+			  
+      <a href="/vehiculos/admin/cadastro">
+        <button type="button" class="btn btn-outline-primary">Cadastrar vehiculo</button>
+      </a>
+        <button type="button" class="btn btn-outline-primary">Cadastrar categoria</button>
+			
+			 
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+				  Categorias
+				</a>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/SUV">SUV</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Sedan">Sedan</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Hatchback">Hatchback</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Crossover">Crossover</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Muscle">Muscle</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Coupe">Coupe</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Minivan">Minivan</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Esportivo">Esportivo</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Wagon">Wagon</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Caminhões">Caminhões</a>
+				  <a class="dropdown-item" href="/vehiculos/admin/categoria/Camionetes">Camionetes</a>
+				</div>
+			  </li>
+			
+			  <form class="d-flex" id="searchModelo">
+				<input class="form-control mr-2" id="modelo" type="search" placeholder="Insira um modelo" aria-label="search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			  </form>
+
+			  <form class="d-flex" id="searchAno">
+				<input class="form-control mr-2"  type="number" id="ano" placeholder="Insira um ano" aria-label="search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			  </form>
+			 
+		  
+		  </nav>
+
+
+
+			
+
+
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <img th:src="@{${vehiculo.imagem}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                    <h5 class="card-title">Modelo: <span th:text="${vehiculo.modelo}"></span></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Ano: <span th:text="${vehiculo.ano}"></span></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Placa: <span th:text="${vehiculo.placa}"></span></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Marca: <span th:text="${vehiculo.marca}"></span></h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Cor: <span th:text="${vehiculo.cor}"></span></h6>
+                    <!-- add more details here -->
+              </div>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" th:data-vehicle-id="${vehiculo.id}">
+                Deletar
+              </button>   
+              
+              
+                <button type="button" class="btn btn-warning">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="modal" tabindex="-1" id="deleteModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Deletar Vehiculo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Esta seguro que quer deletar este vehiculo?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" id="deleteButton">Deletar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Tu script JavaScript -->
+	<script th:inline="javascript">
+
+		$(document).ready(function() {
+			$("#searchModelo").submit(function(e) {
+				e.preventDefault();
+				var modelo = $('#modelo').val().trim(); // Obtener el valor del campo de entrada con el ID "modelo"
+				// Construir la nueva URL
+				var newUrl = "/vehiculos/admin/modelo/" + modelo;
+				// Reemplazar completamente la URL actual con la nueva URL
+				window.location.href = newUrl;
+			});
+		});$(document).ready(function() {
+			$("#searchAno").submit(function(e) {
+				e.preventDefault();
+				var ano = $('#ano').val().trim(); 
+				// Construir la nueva URL
+				var newUrl = "/vehiculos/admin/ano/" + ano;
+				// Reemplazar completamente la URL actual con la nueva URL
+				window.location.href = newUrl;
+			});
+		});
+
+      
+                        $(document).ready(function() {
+                    (function($) {
+                    $('#deleteModal').on('show.bs.modal', function(event) {
+                    var button = $(event.relatedTarget);
+                    var vehicleId = button.data('vehicle-id');
+                    $(this).find('#deleteButton').data('vehicle-id', vehicleId);
+                    });
+
+                    $('#deleteButton').click(function() {
+                    var vehicleId = $(this).data('vehicle-id');
+                    var url = 'vehiculos/delete/' + vehicleId;
+
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function() {
+                        $('#deleteModal').modal('hide');
+                        location.reload();
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                        if (xhr.status === 404) {
+                            console.log('Error deleting vehicle:', xhr.responseText);
+                            alert('Error deleting vehicle: ' + xhr.responseText);
+                        } else {
+                            console.log('Error deleting vehicle:', errorThrown);
+                            alert('Error deleting vehicle');
+                        }
+                        }
+                    });
+                    });
+                })(jQuery);
+                });
+    </script>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+li{
+    list-style: none;
+}.collapse {
+    display: none;
+  }
+  
+  .collapse.show {
+    display: block;
+  }
